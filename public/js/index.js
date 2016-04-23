@@ -49,7 +49,7 @@ function getHistory(){
 function showHistory(data){
     var storySection = $('#story-section');
     storySection.append('<p> Average High Temperature: ' + data.almanac.temp_high.normal.F + ' ℉</p>');
-    storySection.append('<p> Average Low Temperature: ' + data.almanac.temp_high.record.F + ' ℉</p>');
+    storySection.append('<p> Record High Temperature: ' + data.almanac.temp_high.record.F + ' ℉</p>');
 }
 
 function getApiKeys(){
