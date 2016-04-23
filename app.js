@@ -17,7 +17,7 @@ app.get('/', function (req, res) {
 
 app.get('/api', function(req, res) {
   res.send({ wuKey: wuKey,  forecastKey: forecastKey, twitterKey: twitterKey});
-})
+});
 
 app.listen(3000, function () {
   console.log('Climate Story listening on port 3000!');
