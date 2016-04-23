@@ -1,10 +1,6 @@
 'use strict';
 
 $( document ).ready(function() {
-     navigator.geolocation.getCurrentPosition(function(position) {
-      var pos = [position.coords.latitude, position.coords.longitude];
-      // getCurrentWeather(pos)
-  })
     getApiKeys();
 });
 
@@ -22,14 +18,23 @@ var state;
 //using lat & long from geolocation, get the city (format: New_York)
 var city;
 
+var position;
 
-function getCurrentWeather(pos){
+function getLocation(){
+    navigator.geolocation.getCurrentPosition(function(position) {
+      position = [position.coords.latitude, position.coords.longitude];
+      getCurrentWeather(position);
+    })
+}
+
+function getCurrentWeather(position){
     $.ajax({
-        url : "http://api.wunderground.com/api/" + wuKey + "/conditions/q/" + pos.join(",") + ".json",
+        url : "http://api.wunderground.com/api/" + wuKey + "/conditions/q/" + position.join(",") + ".json",
         dataType : "jsonp",
         method: "GET"
     }).done(function(data){
-        console.log(data)
+        $("#temp-today").html(data.current_observation.temp_f)
+        $("#weather-today").html(data.current_observation.weather)
     })
 }
 
@@ -59,8 +64,9 @@ function getApiKeys(){
   }).done(function(data){
     wuKey = data.wuKey;
     forecastKey = data.forecastKey;
-    // return "data";
-    console.log(wuKey)
-    // return "data";
-  }).done(function(data){ getHistory() })
+  }).done(function(data){
+    getLocation()
+  }).done(function(data){
+    getHistory()
+  })
 }
