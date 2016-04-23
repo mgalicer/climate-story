@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/mgalicer/climate-story/issues"
   },
-  "homepage": "https://github.com/mgalicer/climate-story#readme"
+  "homepage": "https://github.com/mgalicer/climate-story#readme",
+  "dependencies": {
+    "dotenv": "^2.0.0"
+  }
 }
