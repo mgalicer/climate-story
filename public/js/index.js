@@ -25,13 +25,28 @@ var getHistory = function(){
   });
 };
 
+
 $( document ).ready(function() {
   function(){
     console.log('inside anonymous, jQueryless function');
   }();
 
     navigator.geolocation.getCurrentPosition(function(position) {
-      console.log(position.coords.latitude, position.coords.longitude);
+      var position = [position.coords.latitude, position.coords.longitude];
     });
     getHistory();
 });
+
+});
+
+function getCurrentWeather(){
+    $.ajax({
+      url : "http://api.wunderground.com/api/" + process.env.WU_KEY + "/geolookup/conditions/q/IA/" +  + ".json",
+      dataType : "jsonp",
+      success : function(parsed_json) {
+      var location = parsed_json['location']['city'];
+      var temp_f = parsed_json['current_observation']['temp_f'];
+      alert("Current temperature in " + location + " is: " + temp_f);
+      }
+      });
+}
