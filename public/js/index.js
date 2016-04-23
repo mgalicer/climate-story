@@ -1,16 +1,21 @@
-'use strict'
+'use strict';
 
-var wuKey = process.env.WU_KEY
+$( document ).ready(function() {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var pos = [position.coords.latitude, position.coords.longitude];
+      getCurrentWeather(pos)
+    });
 
-//Figure out how to pull the current date
-//Then convert the date to YYYYMMDD format.
-var currentDate;
+    //Figure out how to pull the current date
+    //Then convert the date to YYYYMMDD format.
+    var currentDate;
 
-//Using lat & long from geolocation, get the state (format: NY)
-var state;
+    //Using lat & long from geolocation, get the state (format: NY)
+    var state;
 
-//using lat & long from geolocation, get the city (format: New_York)
-var city;
+    //using lat & long from geolocation, get the city (format: New_York)
+    var city;
+});
 
 var getHistory = function(){
   console.log('in getHistory fn');
@@ -22,25 +27,15 @@ var getHistory = function(){
   }).done(function(weatherHistory){
     console.log("data: " + weatherHistory);
   });
-};
+}
 
-function getCurrentWeather(){
+function getCurrentWeather(pos){
+    console.log("http://api.wunderground.com/api/02b2d0d796943ad3/conditions/q/" + pos.join(",") + ".json")
     $.ajax({
-      url : "http://api.wunderground.com/api/" + wuKey + "/geolookup/conditions/q/IA/" +  + ".json",
-      dataType : "jsonp",
-      success : function(parsed_json) {
-      var location = parsed_json['location']['city'];
-      var temp_f = parsed_json['current_observation']['temp_f'];
-      alert("Current temperature in " + location + " is: " + temp_f);
-      }
-      });
-});
-
-
-$( document ).ready(function() {
-    navigator.geolocation.getCurrentPosition(function(position) {
-      var position = [position.coords.latitude, position.coords.longitude];
-    });
-});
-
-
+        url : "http://api.wunderground.com/api//conditions/q/" + pos.join(",") + ".json",
+        dataType : "jsonp",
+        method: "GET"
+    }).done(function(data){
+        console.log(data)
+    })
+}
