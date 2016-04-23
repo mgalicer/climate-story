@@ -1,6 +1,17 @@
-'use strict'
+'use strict';
 
-var wuKey = process.env.WU_KEY
+$( document ).ready(function() {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var pos = [position.coords.latitude, position.coords.longitude];
+      // getCurrentWeather(pos)
+    });
+    getApiKeys();
+    getHistory();
+});
+
+var wuKey;
+
+var forecastKey;
 
 //Figure out how to pull the current date
 //Then convert the date to YYYYMMDD format.
@@ -12,35 +23,37 @@ var state;
 //using lat & long from geolocation, get the city (format: New_York)
 var city;
 
+
+function getCurrentWeather(pos){
+    $.ajax({
+        url : "http://api.wunderground.com/api/" + wuKey + "/conditions/q/" + pos.join(",") + ".json",
+        dataType : "jsonp",
+        method: "GET"
+    }).done(function(data){
+        console.log(data)
+    })
+}
+
 var getHistory = function(){
   console.log('in getHistory fn');
-  $.ajax({
-    // url: "http://api.wunderground.com/api/" + wuKey + "/history_" + currentDate + "/q/" + state + "/" + city + ".json",
-    url: "http://api.wunderground.com/api/" + wuKey + "/history_20160423/q/NY/New_York.json",
-    method: "GET",
-    data: weatherHistory
-  }).done(function(weatherHistory){
-    console.log("data: " + weatherHistory);
-  });
+  // $.ajax({
+  //   // url: "http://api.wunderground.com/api/" + wuKey + "/history_" + currentDate + "/q/" + state + "/" + city + ".json",
+  //   url: "http://api.wunderground.com/api/" + wuKey + "/history_20160423/q/NY/New_York.json",
+  //   method: "GET",
+  //   data: weatherHistory
+  // }).done(function(weatherHistory){
+  //   console.log("data: " + weatherHistory);
+  // });
 };
 
-function getCurrentWeather(){
-    $.ajax({
-      url : "http://api.wunderground.com/api/" + wuKey + "/geolookup/conditions/q/IA/" +  + ".json",
-      dataType : "jsonp",
-      success : function(parsed_json) {
-      var location = parsed_json['location']['city'];
-      var temp_f = parsed_json['current_observation']['temp_f'];
-      alert("Current temperature in " + location + " is: " + temp_f);
-      }
-      });
-});
-
-
-$( document ).ready(function() {
-    navigator.geolocation.getCurrentPosition(function(position) {
-      var position = [position.coords.latitude, position.coords.longitude];
-    });
-});
-
-
+var getApiKeys = function(){
+  $.ajax({
+    url: "/api",
+    method: "GET"
+    // data: apiInfo
+  }).done(function(data){
+    wuKey = data.wuKey;
+    forecastKey = data.forecastKey;
+    console.log(wuKey);
+  })
+}
