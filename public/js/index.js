@@ -1,12 +1,11 @@
 'use strict';
 
 $( document ).ready(function() {
-    navigator.geolocation.getCurrentPosition(function(position) {
+     navigator.geolocation.getCurrentPosition(function(position) {
       var pos = [position.coords.latitude, position.coords.longitude];
       // getCurrentWeather(pos)
-    });
+  })
     getApiKeys();
-    getHistory();
 });
 
 var wuKey;
@@ -34,26 +33,34 @@ function getCurrentWeather(pos){
     })
 }
 
-var getHistory = function(){
+function getHistory(){
   console.log('in getHistory fn');
-  // $.ajax({
-  //   // url: "http://api.wunderground.com/api/" + wuKey + "/history_" + currentDate + "/q/" + state + "/" + city + ".json",
-  //   url: "http://api.wunderground.com/api/" + wuKey + "/history_20160423/q/NY/New_York.json",
-  //   method: "GET",
-  //   data: weatherHistory
-  // }).done(function(weatherHistory){
-  //   console.log("data: " + weatherHistory);
-  // });
+  $.ajax({
+    // url: "http://api.wunderground.com/api/" + wuKey + "/history_" + currentDate + "/q/" + state + "/" + city + ".json",
+    url: "http://api.wunderground.com/api/" + wuKey + "/almanac/q/NY/New_York.json",
+    method: "GET"
+}).done(function(data){
+    var avgHigh = data.almanac.temp_high.normal.F
+    console.log("average high: " + avgHigh);
+    showHistory(data);
+  });
 };
 
-var getApiKeys = function(){
+function showHistory(data){
+    var storySection = $('#story-section');
+    storySection.append('<p> Average High Temperature: ' + data.almanac.temp_high.normal.F + ' ℉</p>');
+    storySection.append('<p> Average Low Temperature: ' + data.almanac.temp_high.record.F + ' ℉</p>');
+}
+
+function getApiKeys(){
   $.ajax({
     url: "/api",
     method: "GET"
-    // data: apiInfo
   }).done(function(data){
     wuKey = data.wuKey;
     forecastKey = data.forecastKey;
-    console.log(wuKey);
-  })
+    // return "data";
+    console.log(wuKey)
+    // return "data";
+  }).done(function(data){ getHistory() })
 }
