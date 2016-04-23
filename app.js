@@ -2,7 +2,7 @@
 
 var express = require('express');
 var app = express();
-var Forecast = require('forecast.io');
+
 require('dotenv').config();
 
 app.use(express.static(__dirname + '/public'));
