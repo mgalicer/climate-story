@@ -1,8 +1,11 @@
 'use strict';
 
 require('dotenv').config();
+
 var wuKey = process.env.WU_KEY;
 var forecastKey = process.env.FORECASTIO_KEY;
+var twitterKey = process.env.TWITTER_KEY;
+
 var express = require('express');
 var app = express();
 
@@ -13,7 +16,7 @@ app.get('/', function (req, res) {
 });
 
 app.get('/api', function(req, res) {
-  res.send({ wuKey: wuKey,  forecastKey: forecastKey });
+  res.send({ wuKey: wuKey,  forecastKey: forecastKey, twitterKey: twitterKey});
 })
 
 app.listen(3000, function () {
