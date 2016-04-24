@@ -30,6 +30,7 @@
 <body>
     <div class="container-fluid">
         <div class="row">
+
             <form>
               <div class="form-group col-md-6">
                 <input class="form-control" id="user-input" placeholder="Describe your climate irregularity here">
@@ -40,20 +41,16 @@
             <div id="map" class="col-md-6"></div>
 
             <aside id="personal-section" class="col-md-4">
-                <h1>Today's Weather</h1>
-                <p id="temp-today"></p>
-                <p id="weather-today"></p>
+                <h2 id="weather-today"></h2>
             </aside>
 
             <aside id="twitter-section" class="col-md-4">
-                <h1>Twitter</h1>
                 <a class="twitter-timeline" href="https://twitter.com/search?q=climate%2C%20weather" data-widget-id="723995124557045760">Tweets about climate, weather</a>
                 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 
             </aside>
 
             <section id="story-section" class="col-md-6">
-                <h1>Historical info, story</h1>
                 <h2>On this date: </h2>
             </section>
 
