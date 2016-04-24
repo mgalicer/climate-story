@@ -1,10 +1,6 @@
 // 'use strict';
 
 $( document ).ready(function() {
-     navigator.geolocation.getCurrentPosition(function(position) {
-      var pos = [position.coords.latitude, position.coords.longitude];
-      // getCurrentWeather(pos)
-  })
     getApiKeys();
 });
 
@@ -13,21 +9,16 @@ var wuKey;
 var forecastKey;
 
 
-//Figure out how to pull the current date
-//Then convert the date to UNIX time to fit Forecast.io API call format
+//Get the date in milliseconds since 1 January 1970 00:00:00
 var currentDate = Date.now();
-console.log('date: ' + currentDate);
-var lat = pos[0];
-var long = pos[1];
 
-function getTimeMachine(){
-    $.ajax({
-        url: "https://api.forecast.io/forecast/" + forecastKey + "/" + lat + "," + long + "," + currentDate,
-        method: "GET"
-    }).done(function(data){
-        console.log(data);
-    })
-}
+//Then convert the date to UNIX time to fit Forecast.io API call format
+var formattedTime = Math.floor(currentDate / 1000);
+console.log('currentDate: ' + currentDate);
+//To get a previous time, subtract 50 years' worth of milliseconds from the current date.
+var milliseconds = ( 50 * 365 * 24 * 60 * 60 );
+var fiftyYearsAgo = ( formattedTime - milliseconds );
+console.log('formattedDate: ' + fiftyYearsAgo);
 
 //Using lat & long from geolocation, get the state (format: NY)
 var state;
@@ -35,14 +26,34 @@ var state;
 //using lat & long from geolocation, get the city (format: New_York)
 var city;
 
+var position;
 
-function getCurrentWeather(pos){
+function getLocation(){
+    navigator.geolocation.getCurrentPosition(function(position) {
+      position = [position.coords.latitude, position.coords.longitude];
+      getCurrentWeather(position);
+      getTimeMachine(position);
+    })
+}
+
+function getTimeMachine(position){
     $.ajax({
-        url : "http://api.wunderground.com/api/" + wuKey + "/conditions/q/" + pos.join(",") + ".json",
+        url: "https://api.forecast.io/forecast/" + forecastKey + "/" + position[0] + "," + position[1] + "," + fiftyYearsAgo,
+        dataType: "jsonp",
+        method: "GET"
+    }).done(function(data){
+        console.log(data);
+    })
+}
+
+function getCurrentWeather(position){
+    $.ajax({
+        url : "http://api.wunderground.com/api/" + wuKey + "/conditions/q/" + position.join(",") + ".json",
         dataType : "jsonp",
         method: "GET"
     }).done(function(data){
-        console.log(data)
+        $("#temp-today").html(data.current_observation.temp_f)
+        $("#weather-today").html(data.current_observation.weather)
     })
 }
 
@@ -52,7 +63,7 @@ function getHistory(){
     url: "http://api.wunderground.com/api/" + wuKey + "/almanac/q/NY/New_York.json",
     method: "GET"
 }).done(function(data){
-    var avgHigh = data.almanac.temp_high.normal.F
+    var avgHigh = data.almanac.temp_high.normal.F;
     showHistory(data);
   });
 };
@@ -63,19 +74,19 @@ function showHistory(data){
     storySection.append('<p> A record high temperature of <strong>' + data.almanac.temp_high.record.F + ' ℉</strong> was recorded on this day in <strong>' + data.almanac.temp_high.recordyear + '</strong>.');
     storySection.append('<p> Average Low Temperature: ' + data.almanac.temp_low.normal.F + ' ℉</p>');
     storySection.append('<p> A record low temperature of <strong>' + data.almanac.temp_low.record.F + ' ℉</strong> was recorded on this day in <strong>' + data.almanac.temp_low.recordyear + '</strong>.');
-
 }
 
-function getApiKeys(getTimeMachine){
+function getApiKeys(){
   $.ajax({
     url: "/api",
     method: "GET"
   }).done(function(data){
     wuKey = data.wuKey;
     forecastKey = data.forecastKey;
-    // return "data";
-    console.log(wuKey)
-    // return "data";
-  }).done(function(data){ getHistory() })
-  getTimeMachine();
+  }).done(function(data){
+    getLocation()
+  }).done(function(data){
+    getHistory();
+  })
+  // getTimeMachine();
 }
