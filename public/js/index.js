@@ -42,8 +42,8 @@ function getCurrentWeather(position){
         dataType : "jsonp",
         method: "GET"
     }).done(function(data){
-        $("#temp-today").html(data.current_observation.temp_f)
-        $("#weather-today").html(data.current_observation.weather)
+        var weatherString = "Today's weather: " + data.current_observation.temp_f + " and " + data.current_observation.weather.toLowerCase() + "!";
+        $("#weather-today").html(weatherString)
     })
 }
 
