@@ -1,5 +1,12 @@
 form {
     margin-left: 5em;
+    margin-top: 2em;
+}
+
+#title{
+    color: #8cb3d9;
+    margin-left: 2em;
+    font-family: 'Raleway', sans-serif;
 }
 
 #map {
@@ -10,8 +17,9 @@ form {
 
 #personal-section {
     /*padding-right: 10em;*/
+    font-family: 'Raleway', sans-serif;
     margin-left: 5em;
-    margin-top: -2em;
+    margin-top: -8em;
     margin-bottom: 2em;
     background-color: #8cb3d9;
     color: #fff;
@@ -19,7 +27,7 @@ form {
 }
 
 #story-section {
-    margin-top: -15em;
+    margin-top: -12em;
     margin-left: 5em;
     border: 1px solid #8cb3d9;
     background-color: #8cb3d9;
@@ -32,6 +40,7 @@ form {
 
 #history-title {
     color: #fff;
+    font-family: 'Raleway', sans-serif;
 }
 
 #story-section > p {
