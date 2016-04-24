@@ -12,15 +12,22 @@ form {
     /*padding-right: 10em;*/
     margin-left: 5em;
     margin-top: -2em;
+    margin-bottom: 2em;
+    background-color: #8cb3d9;
+    color: #fff;
+    padding-bottom: 1em;
 }
 
 #story-section {
-    margin-top: -25em;
+    margin-top: -15em;
+    margin-left: 5em;
     border: 1px solid #8cb3d9;
     background-color: #8cb3d9;
     padding: 2em;
     color: #4d4d4d;
-    width: 56.5%;
+    width: 55em;
+
+/*    width: 56.5%;*/
 }
 
 #history-title {
@@ -40,5 +47,5 @@ form {
     width: 20em;
     /*margin-top: 25em;*/
     font-size: 24px;
-    margin: 0 auto;
+    /*margin: 0 auto;*/
 }
