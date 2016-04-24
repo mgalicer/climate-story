@@ -15,9 +15,9 @@ var currentDate = Date.now();
 //Then convert the date to UNIX time to fit Forecast.io API call format
 var formattedTime = Math.floor(currentDate / 1000);
 console.log('currentDate: ' + currentDate);
-//To get a previous time, subtract 50 years' worth of milliseconds from the current date.
-var milliseconds = ( 50 * 365 * 24 * 60 * 60 );
-var fiftyYearsAgo = ( formattedTime - milliseconds );
+//To get a previous time, subtract 50 years' worth of seconds from the current date.
+var seconds = ( 50 * 365 * 24 * 60 * 60 );
+var fiftyYearsAgo = ( formattedTime - seconds );
 console.log('formattedDate: ' + fiftyYearsAgo);
 
 //Using lat & long from geolocation, get the state (format: NY)
