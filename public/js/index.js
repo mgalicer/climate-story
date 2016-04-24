@@ -2,6 +2,7 @@
 
 $( document ).ready(function() {
     getApiKeys();
+    makeMap();
 });
 
 var wuKey;
@@ -19,6 +20,16 @@ var state;
 var city;
 
 var position;
+
+function makeMap(){
+    var map;
+    function initMap() {
+      map = new google.maps.Map(document.getElementById('map'), {
+        center: {lat: -34.397, lng: 150.644},
+        zoom: 8
+      });
+    }
+}
 
 function getLocation(){
     navigator.geolocation.getCurrentPosition(function(position) {

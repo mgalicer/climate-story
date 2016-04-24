@@ -1,4 +1,11 @@
 #map-section {
+    height: 30em;
+}
+
+#map {
+    height: 30em;
+    width: 65em;
+    margin: 2em 0em 2em 2em;
 }
 
 #personal-section {
