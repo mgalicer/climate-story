@@ -20,13 +20,18 @@
   <script type="text/javascript" src="js/index.js"></script>
 
   <script src="https://www.promisejs.org/polyfills/promise-done-7.0.4.min.js"></script>
+  <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBwgvhqG9A1VyX2YY-Gj-ldaL2FPbWe2FI&libraries=visualization&callback=initMap">
+  </script>
+  <script src="js/map.js"> </script>
 </head>
 
 <body>
     <div class="container-fluid">
         <div class="row">
-          <section id="map-section" class="col-md-4">
-          </section>
+            <section id="map-section" class="col-md-6">
+                <div id="map"></div>
+            </section>
 
             <aside id="personal-section" class="col-md-4 pull-right">
                 <h1>Today's Weather</h1>
