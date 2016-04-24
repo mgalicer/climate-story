@@ -95,7 +95,7 @@ function getHistory(){
 
 function showHistory(data){
     var storySection = $('#story-section');
-    storySection.append('<p>Fifty years ago today, on ' + fiftyYearsAgoPretty + ', the temperature was: ' +  pastTemp + ' ℉</p>');
+    storySection.append('<p>Fifty years ago today, on <strong>' + fiftyYearsAgoPretty + '</strong>, the temperature was: <strong>' +  pastTemp + '</strong> ℉.</p>');
     storySection.append('<p> Average High Temperature: ' + data.almanac.temp_high.normal.F + ' ℉</p>');
     storySection.append('<p> A record high temperature of <strong>' + data.almanac.temp_high.record.F + ' ℉</strong> was recorded on this day in <strong>' + data.almanac.temp_high.recordyear + '</strong>.');
     storySection.append('<p> Average Low Temperature: ' + data.almanac.temp_low.normal.F + ' ℉</p>');
