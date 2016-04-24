@@ -11,6 +11,7 @@ form {
 #personal-section {
     /*padding-right: 10em;*/
     margin-left: 5em;
+    margin-top: -2em;
 }
 
 #story-section {
@@ -22,4 +23,5 @@ form {
 
 #twitter-section {
     margin-left: 5em;
+
 }
