@@ -24,39 +24,43 @@
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBwgvhqG9A1VyX2YY-Gj-ldaL2FPbWe2FI&libraries=visualization&callback=initMap">
   </script>
   <script src="js/map.js"> </script>
+  <script src="https://cdn.firebase.com/js/client/2.2.1/firebase.js"></script>
 </head>
 
 <body>
     <div class="container-fluid">
         <div class="row">
-            <section id="map-section" class="col-md-6">
-                <div id="map"></div>
-            </section>
+            <form>
+              <div class="form-group col-md-6">
+                <input class="form-control" id="user-input" placeholder="Describe your climate irregularity here">
+              </div>
+              <button type="submit" class="btn btn-default col-md-1">Pin it!</button>
+            </form>
 
-            <aside id="personal-section" class="col-md-4 pull-right">
+            <div id="map" class="col-md-6"></div>
+
+            <aside id="personal-section" class="col-md-4">
                 <h1>Today's Weather</h1>
                 <p id="temp-today"></p>
                 <p id="weather-today"></p>
             </aside>
-        </div>
 
-        <aside id="twitter-section" class="col-md-4 pull-right">
-            <h1>Twitter</h1>
-            <a class="twitter-timeline" href="https://twitter.com/search?q=climate%2C%20weather" data-widget-id="723995124557045760">Tweets about climate, weather</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+            <aside id="twitter-section" class="col-md-4">
+                <h1>Twitter</h1>
+                <a class="twitter-timeline" href="https://twitter.com/search?q=climate%2C%20weather" data-widget-id="723995124557045760">Tweets about climate, weather</a>
+                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 
-        </aside>
+            </aside>
 
-        <div class="row">
             <section id="story-section" class="col-md-6">
                 <h1>Historical info, story</h1>
                 <h2>On this date: </h2>
             </section>
-        </div>
 
-        <section id="api-logos" class="col-md-12">
-            <img src="images/WU_logo.jpg" alt="Weather Underground logo" height="80px" width="150px">
-        </section>
+            <section id="api-logos" class="col-md-12">
+                <img src="images/WU_logo.jpg" alt="Weather Underground logo" height="80px" width="150px">
+            </section>
+        </div>
     </div>
 </body>
 
