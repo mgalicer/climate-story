@@ -1,21 +1,15 @@
-// 'use strict';
+'use strict';
+
+var wuKey;
+var forecastKey;
+var state;
+var city;
+var position;
 
 $( document ).ready(function() {
     getApiKeys();
-    makeMap();
+    // makeMap();
 });
-
-var wuKey;
-
-var forecastKey;
-
-//Using lat & long from geolocation, get the state (format: NY)
-var state;
-
-//using lat & long from geolocation, get the city (format: New_York)
-var city;
-
-var position;
 
 function makeMap(){
     var map;
@@ -63,12 +57,7 @@ function getTimeMachine(position){
     var fiftyYearsAgo = ( formattedTime - seconds );
     var fiftyYearsAgoMilliseconds = new Date( fiftyYearsAgo * 1000);
     fiftyYearsAgoPretty = fiftyYearsAgoMilliseconds.toDateString();
-    console.log(fiftyYearsAgoPretty);
-    // var checkDate = Date.UTC(1966, 3, 24);
-    // var fiftyYaObject = new Date( (-116413916 * 1000) );
-    // var fiftyCheck = fiftyYaObject.toUTCString();
-    // console.log('check Date: ' + checkDate);
-    console.log('formattedDate: ' + fiftyYearsAgo);
+
     // console.log('fifty check: ' + fiftyCheck);
     $.ajax({
         url: "https://api.forecast.io/forecast/" + forecastKey + "/" + position[0] + "," + position[1] + "," + fiftyYearsAgo,
